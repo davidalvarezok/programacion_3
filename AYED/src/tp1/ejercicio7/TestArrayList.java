@@ -32,7 +32,7 @@ public class TestArrayList {
         num.add(2); 
         num.add(4); 
         num.add(5); 
-        if (esCapicua(num)) {
+        if (esCapicua1(num)) {
         	System.out.println("El numero es capicua");
         } else {
         	System.out.println("El numero no es capicua");
@@ -73,6 +73,16 @@ public class TestArrayList {
     		if (lista.get(i) != l.get(i)) {
     			resul = false; 
     			break; 
+    		}
+    	}
+    	return resul; 
+    }
+    public static boolean esCapicua1(ArrayList<Integer> lista) { //More efficient 
+    	boolean resul = true; int n = lista.size() - 1;  
+    	for (int i = 0; i < lista.size()/2; i++) {
+    		if (lista.get(i) != lista.get(n-i)) {
+    			resul = false; 
+    			break;
     		}
     	}
     	return resul; 
