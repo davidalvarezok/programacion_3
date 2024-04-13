@@ -9,36 +9,27 @@ public class Transformacion {
 	}
 	
 	public BinaryTree<Integer> suma() {
-		this.recorrer(ab,0);
+		this.recursivo(ab); 
 		return ab; 
 	}
 	
-	public int dataChild (BinaryTree<Integer> a) {
-		return a.getData(); 
-	}
-	
-	public void recorrer (BinaryTree<Integer> a, int aux) {
-		if (a == null) {
-			return; 
-		}
-		
+	public int recursivo (BinaryTree<Integer> a) {
 		if (a.isLeaf()) {
+			int valou = a.getData(); 
 			a.setData(0);
-			return; 
+			return valou; 
+		} else if (a.hasLeftChild() && !a.hasRightChild()){
+			int valou = a.getData();
+			a.setData(this.recursivo(a.getLeftChild())); 
+			return valou + a.getData(); 
+		} else if (!a.hasLeftChild() && a.hasRightChild()) {
+			int valou = a.getData(); 
+			a.setData(this.recursivo(a.getRightChild()));
+			return valou + a.getData(); 
+		} else {
+			int valou = a.getData();
+			a.setData(this.recursivo(a.getLeftChild()) + this.recursivo(a.getRightChild()));
+			return valou + a.getData(); 
 		}
-		
-		int suma = 0; 
-		if (a.hasLeftChild()) {
-			suma += this.dataChild(a.getLeftChild()); //Devuelve el dato del hijo
-			this.recorrer(a.getLeftChild(), aux);
-		}
-		if (a.hasRightChild()) {
-			suma += this.dataChild(a.getRightChild()); 
-			this.recorrer(a.getRightChild(), aux);
-		}
-		aux = a.getData();
-		suma += aux; //Le sumo el valor de arrastre
-		 
-		a.setData(suma);
 	}
 }

@@ -40,5 +40,7 @@ public class RedBinariaLlena {
 			valores.removeLast(); //Elimina el ult elem de la lista
 		}
 	}
+	
+	
 
 }
