@@ -27,6 +27,6 @@ public class ParcialArboles {
 		this.analisis(arbol1, lista1); 
 		this.analisis(arbol2, lista2);
 		return this.comparo(lista1, lista2); 
-	}
+	} 
 
 }
