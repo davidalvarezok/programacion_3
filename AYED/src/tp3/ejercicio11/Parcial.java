@@ -19,9 +19,9 @@ public class Parcial {
 				for (GeneralTree<Integer> child : children) {
 					contador++;
 					queue.enqueue(child);
-				}
-			} else {
-				nivel++; //Nivel_de_nodos_que_se_guardo_Si_se_eran_hojas_no_se_guarda_null
+				}    //Contador posee el numero de hijos que se pusieron en cola, si es cero, el ult
+			} else { //nivel procesado fueron todas hojas
+				nivel++; //Nivel_de_nodos_que_se_guardo_hasta_ahora
 				if (contador > 0) {
 					queue.enqueue(null);
 					if (nivel+1 != contador) {
