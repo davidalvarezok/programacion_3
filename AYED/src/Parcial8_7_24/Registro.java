@@ -22,7 +22,7 @@ public class Registro {
 	}
 	@Override
 	public String toString() {
-		return "Estacion " + getEstacion() + " " + getTransbordo() + " ";
+		return "Estacion " + getEstacion() + ", " + getTransbordo() + " ";
 	} 
 	
 

@@ -2,39 +2,50 @@ package Parcial8_7_24;
 
 import java.util.*;
 import tp5.ejercicio1.*;
-import tp1.ejercicio8.Queue;
+
 
 public class Metro {
-	public List<Registro> menosTransbordos(Graph<String> maps, String origen) {
-		List<Registro> camino = new LinkedList<Registro>();
-		boolean[] marca = new boolean[maps.getSize()];
-		Vertex<String> v = maps.search(origen);
-		bfs(maps, camino, v.getPosition(), marca, 0);
-		return camino;
+	public List<Registro> menosTrasbordos (Graph<String> maps, String origen){
+		List<Registro> lista = new LinkedList<Registro>(); 
+		boolean[] marca = new boolean [maps.getSize()]; 
+		Vertex<String> v = maps.search(origen); 
+		if (v != null) {
+			dfs(maps, v.getPosition(), marca, origen, 0, lista); 
+		}
+		return lista; 
 	}
-
-	private List<Registro> bfs(Graph<String> maps, List<Registro> camino, int i, boolean[] marca, int trans) {
-		Queue<Vertex<String>> queue = new Queue<Vertex<String>>();
-		Vertex<String> v = maps.getVertex(i);
-		Vertex<String> aux;
-		queue.enqueue(v);
-		while (!queue.isEmpty()) {
-			aux = queue.dequeue();
-			marca[aux.getPosition()] = true; // marcamos_como_visitado
-			List<Edge<String>> adyacentes = maps.getEdges(aux);
-			if (adyacentes.size() > 2) {
-				trans++;
-			}
-			if (adyacentes.size() == 0) {
-				// Es un extremo
-				Registro res = new Registro(aux.getData(), trans);
-				camino.add(res);
-			}
-			for (Edge<String> e : adyacentes) {
-				queue.enqueue(e.getTarget());
+	
+	public void dfs(Graph<String> grafo, int i, boolean[] marca, String origen, int cant, List<Registro> l) {
+		marca[i] = true; 
+		Vertex<String> v = grafo.getVertex(i); 
+		List<Edge<String>> adyacentes = grafo.getEdges(v); 
+		int size = adyacentes.size(); 
+		for (Edge<String> e : adyacentes) {
+			int j = e.getTarget().getPosition(); 
+			if (!marca[j]) {
+				if (size > 2) {
+					dfs(grafo, j, marca, origen, cant+1, l); 
+				} else {
+					dfs(grafo, j, marca, origen, cant, l); 
+				}
 			}
 		}
-		return camino;
+		if (adyacentes.size() == 1 && !v.getData().equals(origen)) {
+			boolean encontre = false; 
+			for (Registro r : l) { //Lista inicialmente vacia
+				if(r.getEstacion().equals(v.getData())) { //Si el nombre de la estacion ya esta en lista
+					encontre = true; 
+					if(r.getTransbordo() > cant) { //Me quedo con la menor cantidad de trasbordos 
+						r.setTransbordo(cant);
+					}
+					
+				}
+			}
+			if (!encontre) {
+				l.add(new Registro(v.getData(),cant)); 
+			}
+		}
+		marca[i] = false; 
 	}
 
 }

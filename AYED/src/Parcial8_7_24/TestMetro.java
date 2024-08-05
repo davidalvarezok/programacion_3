@@ -30,27 +30,46 @@ public class TestMetro {
         Vertex<String> v19 = grafo.createVertex("Saúde");
 
         grafo.connect(v1, v4);
+        grafo.connect(v4, v1);
         grafo.connect(v4, v3);
+        grafo.connect(v3,v4);
         grafo.connect(v3, v2);
+        grafo.connect(v2,v3);
         grafo.connect(v4, v8);
+        grafo.connect(v8,v4);
         grafo.connect(v4, v5);
+        grafo.connect(v5,v4);
         grafo.connect(v5, v6);
+        grafo.connect(v6,v5);
         grafo.connect(v6, v7);
+        grafo.connect(v7,v6);
         grafo.connect(v8, v11);
+        grafo.connect(v11,v8);
         grafo.connect(v11, v16);
+        grafo.connect(v16,v11);
         grafo.connect(v11, v14);
+        grafo.connect(v14,v11);
         grafo.connect(v11, v12);
+        grafo.connect(v12,v11);
         grafo.connect(v11, v10);
+        grafo.connect(v10,v11);
         grafo.connect(v10, v9);
+        grafo.connect(v9,v10);
         grafo.connect(v12, v13);
+        grafo.connect(v13,v12);
         grafo.connect(v16, v15);
+        grafo.connect(v15,v16);
         grafo.connect(v14, v16);
+        grafo.connect(v16,v14);
         grafo.connect(v14, v17);
+        grafo.connect(v17,v14);
         grafo.connect(v14, v18);
+        grafo.connect(v18,v14);
         grafo.connect(v18, v19);
+        grafo.connect(v19,v18);
 
         Metro metro = new Metro();
-        LinkedList<Registro> camino = (LinkedList<Registro>) metro.menosTransbordos(grafo, "Butanta");
+        LinkedList<Registro> camino = (LinkedList<Registro>) metro.menosTrasbordos(grafo, "Butanta");
         for (Registro r : camino) {
             System.out.println(r);
         }
